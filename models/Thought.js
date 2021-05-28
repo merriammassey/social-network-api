@@ -5,7 +5,7 @@ const ReactionSchema = new Schema(
   {
     reactionId: {
       type: Schema.Types.ObjectId,
-      //default: new ObjectId
+      default: () => new Types.ObjectId(),
     },
     reactionBody: {
       type: String,
@@ -48,20 +48,12 @@ const ThoughtSchema = new Schema(
       //use getter to format date using the dateFormat() function
       get: (createdAtVal) => dateFormat(createdAtVal),
     },
-    username: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        //string
-        //required
-      },
-    ],
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Reaction",
-      },
-    ],
+    username: {
+      type: String,
+      required: "Username is required",
+    },
+
+    reactions: [ReactionSchema],
   },
   {
     toJSON: {
@@ -73,12 +65,10 @@ const ThoughtSchema = new Schema(
 );
 
 ThoughtSchema.virtual("reactionCount").get(function () {
-  return this.reaction.reduce(
-    (total, reaction) => total + reaction.length + 1,
-    0
-  );
+  return this.reactions.length;
 });
 
+////create the model to get the prebuilt methods that Mongoose provides
 const Thought = model("Thought", ThoughtSchema);
 
 module.exports = Thought;
