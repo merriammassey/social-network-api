@@ -1,4 +1,4 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 //const dateFormat = require
 
@@ -42,6 +42,7 @@ UserSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
+//create the model to get the prebuilt methods that Mongoose provides
 const User = model("User", UserSchema);
 
 module.exports = User;
