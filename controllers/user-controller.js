@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 //methods for getting, creating, deleting, and updating users
 const userController = {
@@ -54,20 +54,27 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
   deleteUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.id })
+    Thought.deleteMany({ username: params.username });
+    User.findOneAndDelete(
+      { _id: params.id }
+      //{ $pull: { thoughts: body.thoughts } },
+      //{ new: true }
+    )
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "That user doesn't exist" });
           return;
         }
+        //deleteMany(dbuserData.thoughts);
         res.json(dbUserData);
       })
+      //.then(dbuserData.thought.deleteMany())
       .catch((err) => res.status(404).json(err));
   },
   addFriend({ params, body }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
-      { $push: { friends: params.userId } },
+      { $push: { friends: params.friendId } },
       { new: true }
     )
       .then((dbUserData) => {
@@ -82,7 +89,7 @@ const userController = {
   deleteFriend({ params, body }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
-      { $pull: { friends: { userId: params.userId } } },
+      { $pull: { friends: params.friendId } },
       { new: true }
     )
       .then((dbUserData) => {

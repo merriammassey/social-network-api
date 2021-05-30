@@ -32,6 +32,8 @@ const ReactionSchema = new Schema(
       //enable getters
       getters: true,
     },
+    id: false,
+    _id: false,
   }
 );
 
