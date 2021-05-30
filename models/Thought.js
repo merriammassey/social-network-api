@@ -14,17 +14,17 @@ const ReactionSchema = new Schema(
     },
     username: {
       type: String,
-      required: "Reaction is required",
+      required: "Username is required",
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal),
+        //get: (createdAtVal) => dateFormat(createdAtVal),
       },
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      //get: (createdAtVal) => dateFormat(createdAtVal),
     },
   },
   {
@@ -46,7 +46,7 @@ const ThoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       //use getter to format date using the dateFormat() function
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      //get: (createdAtVal) => dateFormat(createdAtVal),
     },
     username: {
       type: String,
