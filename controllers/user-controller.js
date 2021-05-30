@@ -54,21 +54,17 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
   deleteUser({ params }, res) {
-    Thought.deleteMany({ username: params.username });
-    User.findOneAndDelete(
-      { _id: params.id }
-      //{ $pull: { thoughts: body.thoughts } },
-      //{ new: true }
-    )
+    User.findOneAndDelete({ _id: params.id })
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "That user doesn't exist" });
           return;
         }
-        //deleteMany(dbuserData.thoughts);
-        res.json(dbUserData);
+        return Thought.deleteMany({ _id: { $in: dbUserData.thoughts } });
       })
-      //.then(dbuserData.thought.deleteMany())
+      .then(() => {
+        res.json({ message: "User is deleted" });
+      })
       .catch((err) => res.status(404).json(err));
   },
   addFriend({ params, body }, res) {
