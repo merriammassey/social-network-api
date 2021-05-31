@@ -9,5 +9,6 @@ This API was designed for a social network web application where users share the
 - Express.js
 - MongoDB
 - Mongoose ODM
+- NoSQL
 
 ### ©️2021 Merriam Massey

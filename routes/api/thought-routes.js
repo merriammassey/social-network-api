@@ -17,11 +17,9 @@ router.route("/").get(getAllThought);
 router.route("/:userId").post(createThought);
 
 // GET, DELETE, and UPDATE one Thought and POST Reaction at /api/thoughts/:userId/:thoughtId
-router
-  .route("/:thoughtId")
-  .get(getThoughtById)
-  .put(updateThought)
-  .delete(deleteThought);
+router.route("/:thoughtId").put(updateThought).delete(deleteThought);
+
+router.route("/:id").get(getThoughtById);
 
 //POST Reaction at /api/thoughts/:userId/:thoughtId
 router.route("/:thoughtId/reactions").put(addReaction);
