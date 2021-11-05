@@ -20,11 +20,19 @@ A NoSQL web API for deployment on a simple social network. Users can add and del
 
 ## Installation
 
-Clone the repository and npm install to get all dependencies. All functions are accessed through Insomnia or Postman.
+Clone the repository and in a terminal from the root directory, enter:
+```
+npm i
+```
 
 ## Usage
 
-Create API requests through Insomnia or Postman, then send them to the specified routes. Information is returned as JSON objects.
+To start the server, in a terminal from the root directory, enter:
+```
+node server.js
+```
+
+Then, test the routes with Insomnia or Postman.
 
 ## Demo
 
